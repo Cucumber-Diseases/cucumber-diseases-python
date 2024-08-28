@@ -97,3 +97,9 @@ def step_impl(context):
 def step_impl(context):
     for row in context.table.rows:
         context.service.add_customer(row["firstname"], row["lastname"], context.default_birthday)
+
+
+@then(u'the customer can be found')
+def step_impl(context):
+    customer = context.service.search_customer(context.first_name, context.last_name)
+    assert_that(customer).is_not_none()
