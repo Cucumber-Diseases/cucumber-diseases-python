@@ -14,11 +14,6 @@ def step_impl(context, name):
     context.last_name = name
 
 
-@given("the customer's birthday is (?P<d>.*)")
-def the_customers_birthday_is(context, d):
-    context.birthday = datetime.strptime(d, "%Y/%m/%d").date()
-
-
 @when(u'the customer is created')
 def step_impl(context):
     try:
