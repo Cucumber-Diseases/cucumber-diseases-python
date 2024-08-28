@@ -88,7 +88,14 @@ def step_impl(context):
 
 @then(u'the second customer creation should fail')
 def step_impl(context):
-    pass
+    caught = None
+    try:
+        context.service.add_customer(context.second_first_name, context.second_last_name, context.default_birthday)
+    except ValueError as e:
+        caught = e
+
+    assert_that(caught).is_not_none()
+    assert_that(str(caught)).is_equal_to("Customer already exists")
 
 
 @given(u'there is a customer')
