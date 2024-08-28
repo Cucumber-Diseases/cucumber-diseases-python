@@ -2,14 +2,6 @@ from assertpy import assert_that
 from behave import *
 
 
-@when(u'the customer is created')
-def step_impl(context):
-    try:
-        context.service.add_customer(context.first_name, context.last_name, context.default_birthday)
-    except ValueError as e:
-        context.error = e
-
-
 @then(u'the customer creation should be successful')
 def step_impl(context):
     assert_that(context.error).is_none()
@@ -34,14 +26,6 @@ def step_impl(context):
 @then(u'the number of customers found is (?P<n>\d+)')
 def step_impl(context, n):
    assert_that(context.count).is_equal_to(int(n))
-
-
-@when(u'an invalid customer is created')
-def step_impl(context):
-    try:
-        context.service.add_customer(context.first_name, context.last_name, context.default_birthday)
-    except ValueError as e:
-        context.error = e
 
 
 @then(u'the customer creation should fail')
@@ -95,6 +79,8 @@ def step_impl(context):
 
 
 @given(u'the customer is created')
+@when(u'an invalid customer is created')
+@when(u'the customer is created')
 def step_impl(context):
     try:
         context.service.add_customer(context.first_name, context.last_name, context.default_birthday)
