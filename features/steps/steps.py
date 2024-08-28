@@ -1,17 +1,5 @@
-from behave import *
-
-from customer import CustomerService
-from datetime import date, datetime
 from assertpy import assert_that
-
-@given(u'the customer first name is "(?P<name>.*)"')
-def step_impl(context, name):
-    context.first_name = name
-
-
-@given(u'the customer last name is "(?P<name>.*)"')
-def step_impl(context, name):
-    context.last_name = name
+from behave import *
 
 
 @when(u'the customer is created')
