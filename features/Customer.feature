@@ -6,8 +6,7 @@ Feature: Customer
       Then the customer creation should be successful
 
     Scenario: Should find newly created customer
-      Given there are no customers
-      And the customer name is Rose Smith
+      Given the customer name is Rose Smith
       When the customer is created
       Then the customer can be found
 
