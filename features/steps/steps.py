@@ -29,7 +29,7 @@ def step_impl(context):
 
 @then(u'the customer creation should be successful')
 def step_impl(context):
-    pass
+    assert_that(context.error).is_none()
 
 
 @given(u'there are no customers')
