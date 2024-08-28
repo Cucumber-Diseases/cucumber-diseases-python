@@ -8,7 +8,7 @@ Feature: Customer
     Scenario: Should find newly created customer
       Given the customer name is Rose Smith
       When the customer is created
-      Then the customer can be found
+      Then the customer Rose Smith can be found
 
     Scenario Outline: Cannot create customer without first or lastname
       Given the customer name is <firstname> <lastname>

@@ -64,11 +64,11 @@ def step_impl(context):
     assert_that(caught).is_not_none()
     assert_that(str(caught)).is_equal_to("Customer already exists")
 
-@then(u'the customer Sabine Mustermann can be found')
-def step_impl(context):
-    customer = context.service.search_customer("Sabine", "Mustermann")
-    assert_that(customer.first_name).is_equal_to("Sabine")
-    assert_that(customer.last_name).is_equal_to("Mustermann")
+@then(u'the customer (?P<first_name>.*?) (?P<last_name>.*?) can be found')
+def step_impl(context, first_name, last_name):
+    customer = context.service.search_customer(first_name, last_name)
+    assert_that(customer.first_name).is_equal_to(first_name)
+    assert_that(customer.last_name).is_equal_to(last_name)
 
 
 @given(u'the customer is created')
@@ -81,9 +81,9 @@ def step_impl(context):
         context.error = e
 
 
-@when(u'the customer Sabine Mustermann is searched')
-def step_impl(context):
-    context.count = len(context.service.search_customers("Sabine", "Mustermann"))
+@when(u'the customer (?P<first_name>.*?) (?P<last_name>.*?) is searched')
+def step_impl(context, first_name, last_name):
+    context.count = len(context.service.search_customers(first_name, last_name))
 
 
 @given(u'there is a customer')
