@@ -64,13 +64,6 @@ def step_impl(context):
     assert_that(caught).is_not_none()
     assert_that(str(caught)).is_equal_to("Customer already exists")
 
-
-@given(u'there is a customer')
-def step_impl(context):
-        table = context.table
-        context.service.add_customer(table.headings[0], table.headings[1], context.default_birthday)
-
-
 @then(u'the customer Sabine Mustermann can be found')
 def step_impl(context):
     customer = context.service.search_customer("Sabine", "Mustermann")
@@ -93,6 +86,7 @@ def step_impl(context):
     context.count = len(context.service.search_customers("Sabine", "Mustermann"))
 
 
+@given(u'there is a customer')
 @given(u'there are some customers')
 def step_impl(context):
     for row in context.table.rows:
