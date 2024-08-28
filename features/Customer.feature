@@ -10,7 +10,7 @@ Feature: Customer
 
     Scenario Outline: Cannot create customer without first or lastname
       When an invalid customer <firstname> <lastname> is created
-      Then the customer creation should fail
+      Then the customer creation should fail with "Mandatory name parameter is missing"
       Examples:
         | description    | firstname | lastname   |
         | only firstname | Max       |            |
@@ -28,8 +28,9 @@ Feature: Customer
       Given there is a customer
         | firstname | lastname   |
         | Max       | Mustermann |
+        | Sabine    | Mustermann |
       When the customer Sabine Mustermann is created
-      Then the creation of customer Sabine Mustermann should fail
+      Then the customer creation should fail with "Customer already exists"
 
     Scenario: Should find an existing customer
       Given there is a customer

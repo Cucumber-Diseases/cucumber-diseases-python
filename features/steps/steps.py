@@ -22,22 +22,11 @@ def step_impl(context, n):
    assert_that(context.count).is_equal_to(int(n))
 
 
-@then(u'the customer creation should fail')
-def step_impl(context):
+@then(u'the customer creation should fail with "(?P<error_message>.*?)"')
+def step_impl(context, error_message):
     assert_that(context).contains("error")
-    assert_that(str(context.error)).is_equal_to("Mandatory name parameter is missing")
+    assert_that(str(context.error)).is_equal_to(error_message)
 
-
-@then(u'the creation of customer (?P<first_name>.*?) (?P<last_name>.*?) should fail')
-def step_impl(context, first_name, last_name):
-    caught = None
-    try:
-        context.service.add_customer(first_name, last_name, context.default_birthday)
-    except ValueError as e:
-        caught = e
-
-    assert_that(caught).is_not_none()
-    assert_that(str(caught)).is_equal_to("Customer already exists")
 
 @then(u'the customer (?P<first_name>.*?) (?P<last_name>.*?) can be found')
 def step_impl(context, first_name, last_name):
