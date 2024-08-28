@@ -22,16 +22,17 @@ Feature: Customer
         | neither nor    |           |            |
 
     Scenario: Should be able to create two customer with different names
-      Given the customer name is Max Mustermann
-      When the customer is created
+      Given there is a customer
+        | Max | Mustermann |
       Given the second customer is Sabine Mustermann
       When the second customer is created
       Then the second customer can be found
 
     Scenario: Cannot create two customer with the same name
-      Given the customer name is Max Mustermann
+      Given there is a customer
+        | Max | Mustermann |
       And the second customer is Max Mustermann
-      When the customer is created
+      When the second customer is created
       Then the second customer creation should fail
 
     Scenario: Should find an existing customer
@@ -40,8 +41,8 @@ Feature: Customer
       Then the customer Sabine Mustermann can be found
 
     Scenario: Should find customers by name
-      Given the customer name is Sabine Mustermann
-      And the customer is created
+      Given there is a customer
+         | Sabine | Mustermann |
       When the customer Sabine Mustermann is searched
       Then the number of customers found is 1
 
